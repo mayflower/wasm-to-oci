@@ -3,7 +3,7 @@ ORG             := engineerd
 BINDIR          := $(CURDIR)/bin
 GOFLAGS         :=
 LDFLAGS         := -w -s
-TARGETS         := darwin/amd64 linux/amd64 windows/amd64
+TARGETS         := darwin/amd64 linux/amd64 linux/arm64 windows/amd64
 TAGS            :=
 
 GOX           = $(GOPATH)/bin/gox
@@ -27,7 +27,7 @@ test:
 	go test $(TESTFLAGS) ./...
 
 $(GOX):
-	(cd /; GO111MODULE=on go get -u github.com/mitchellh/gox)
+	(cd /; GO111MODULE=on go install github.com/mitchellh/gox@latest)
 
 .PHONY: build-cross
 build-cross: LDFLAGS += -extldflags "-static"
